@@ -307,6 +307,7 @@ export default function App() {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // NEW: Handle Input Changes
   const handleInputChange = (e) => {
@@ -320,13 +321,22 @@ export default function App() {
   // NEW: Handle Form Submission (Mailto)
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    setIsSubmitting(true);
     
     const subject = `Portfolio Contact from ${formData.name}`;
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
     const mailtoLink = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
-    window.location.href = mailtoLink;
+    // Create a temporary link and click it to avoid popup blockers and ensure it triggers
+    const link = document.createElement('a');
+    link.href = mailtoLink;
+    link.click();
+    
+    setTimeout(() => {
+        setIsSubmitting(false);
+        // Optional: clear form
+        // setFormData({ name: '', email: '', message: '' }); 
+    }, 1000);
   };
 
   return (
@@ -737,8 +747,16 @@ export default function App() {
                           required
                        ></textarea>
                     </div>
-                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold text-lg rounded-xl hover:shadow-[0_0_40px_rgba(147,51,234,0.4)] hover:scale-[1.01] transition-all flex justify-center items-center gap-3">
-                       <Send size={20} /> Send Transmission
+                    <button type="submit" disabled={isSubmitting} className="w-full py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold text-lg rounded-xl hover:shadow-[0_0_40px_rgba(147,51,234,0.4)] hover:scale-[1.01] transition-all flex justify-center items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed">
+                       {isSubmitting ? (
+                         <>
+                           <Activity className="animate-spin" size={20} /> Preparing Transmission...
+                         </>
+                       ) : (
+                         <>
+                           <Send size={20} /> Send Transmission
+                         </>
+                       )}
                     </button>
                  </form>
 

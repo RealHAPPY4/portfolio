@@ -300,6 +300,34 @@ const NavLink = ({ href, children, onClick }) => (
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAllCerts, setShowAllCerts] = useState(false);
+  
+  // NEW: Form State for Functional Contact Form
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  // NEW: Handle Input Changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // NEW: Handle Form Submission (Mailto)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
+    
+    const subject = `Portfolio Contact from ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    const mailtoLink = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    window.location.href = mailtoLink;
+  };
 
   return (
     <div className="min-h-screen bg-black text-slate-300 font-sans selection:bg-cyan-500/30 overflow-x-hidden">
@@ -671,22 +699,45 @@ export default function App() {
             
             <SpotlightCard className="p-1 rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
               <div className="bg-black/80 rounded-[20px] p-8 md:p-12 backdrop-blur-xl">
-                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                        <div className="space-y-2">
                           <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Name</label>
-                          <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500 focus:bg-white/10 transition-all placeholder:text-slate-600" placeholder="John Doe" />
+                          <input 
+                            type="text" 
+                            name="name" 
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500 focus:bg-white/10 transition-all placeholder:text-slate-600" 
+                            placeholder="John Doe"
+                            required
+                          />
                        </div>
                        <div className="space-y-2">
                           <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email</label>
-                          <input type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-purple-500 focus:bg-white/10 transition-all placeholder:text-slate-600" placeholder="john@example.com" />
+                          <input 
+                            type="email" 
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-purple-500 focus:bg-white/10 transition-all placeholder:text-slate-600" 
+                            placeholder="john@example.com"
+                            required
+                          />
                        </div>
                     </div>
                     <div className="space-y-2">
                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Message</label>
-                       <textarea className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500 focus:bg-white/10 transition-all placeholder:text-slate-600 min-h-[160px] resize-none" placeholder="Tell me about your project..."></textarea>
+                       <textarea 
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500 focus:bg-white/10 transition-all placeholder:text-slate-600 min-h-[160px] resize-none" 
+                          placeholder="Tell me about your project..."
+                          required
+                       ></textarea>
                     </div>
-                    <button className="w-full py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold text-lg rounded-xl hover:shadow-[0_0_40px_rgba(147,51,234,0.4)] hover:scale-[1.01] transition-all flex justify-center items-center gap-3">
+                    <button type="submit" className="w-full py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold text-lg rounded-xl hover:shadow-[0_0_40px_rgba(147,51,234,0.4)] hover:scale-[1.01] transition-all flex justify-center items-center gap-3">
                        <Send size={20} /> Send Transmission
                     </button>
                  </form>

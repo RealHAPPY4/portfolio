@@ -156,15 +156,45 @@ const education = [
 ];
 
 const publications = [
-  { title: "FPGA-Based 3D EM/MPM Simulation Framework for Medical Image Segmentation Applications", status: "Published at IEEE Xplore, 2025", link: "https://ieeexplore.ieee.org/document/10959571" },
-  { title: "Optimized FPGA-Based Simulation Framework for Efficient Image Data Processing", status: "On print for IEEE, 2026" },
-  { title: "Electromechanical Simulation and 3D Visualization of a Solenoid-Powered V8 Engine", status: "On print for IEEE, 2026" },
-  { title: "Context-Aware MQTT Framework for Autonomous Medical Actuation in Emergency Scenarios", status: "On print for IEEE, 2026" },
-  { title: "Large Language Models in the Market: A Study on Financial Forecasting and Stock Interpretation", status: "On print for IEEE, 2026" },
-  { title: "Expectations-Driven Inflation in India: Reconstructing the Phillips Curve through Artificial Intelligence", status: "On print for IEEE, 2026" },
-  { title: "Dynamic Budgeting with AI: Balancing Health Outcomes and Inflation", status: "On print for IEEE, 2026" },
-  { title: "Breaking Development Traps: Synthetic Household Simulations for Poverty Alleviation in Rural West Bengal", status: "On print for IEEE, 2026" },
-  { title: "District-Level Economic Forecasting in West Bengal using a Proxy-Enhanced Cobb–Douglas Framework", status: "On print for IEEE, 2026" }
+  { 
+    title: "FPGA-Based 3D EM/MPM Simulation Framework for Medical Image Segmentation Applications", 
+    status: "Published at IEEE Xplore, 2025", 
+    link: "https://ieeexplore.ieee.org/document/10959571" 
+  },
+  { 
+    title: "Optimized FPGA-Based Simulation Framework for Efficient Image Data Processing", 
+    status: "On print for IEEE, 2026" 
+  },
+  { 
+    title: "Electromechanical Simulation and 3D Visualization of a Solenoid-Powered V8 Engine", 
+    status: "Published at IEEE Xplore, 2026", 
+    link: "https://ieeexplore.ieee.org/document/11365856" 
+  },
+  { 
+    title: "Context-Aware MQTT Framework for Autonomous Medical Actuation in Emergency Scenarios", 
+    status: "Published at IEEE Xplore, 2026", 
+    link: "https://ieeexplore.ieee.org/document/11365929" 
+  },
+  { 
+    title: "Large Language Models in the Market: A Study on Financial Forecasting and Stock Interpretation", 
+    status: "On print for IEEE, 2026" 
+  },
+  { 
+    title: "Expectations-Driven Inflation in India: Reconstructing the Phillips Curve through Artificial Intelligence", 
+    status: "On print for IEEE, 2026" 
+  },
+  { 
+    title: "Dynamic Budgeting with AI: Balancing Health Outcomes and Inflation", 
+    status: "On print for IEEE, 2026" 
+  },
+  { 
+    title: "Breaking Development Traps: Synthetic Household Simulations for Poverty Alleviation in Rural West Bengal", 
+    status: "On print for IEEE, 2026" 
+  },
+  { 
+    title: "District-Level Economic Forecasting in West Bengal using a Proxy-Enhanced Cobb–Douglas Framework", 
+    status: "On print for IEEE, 2026" 
+  }
 ];
 
 const certifications = [
